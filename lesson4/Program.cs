@@ -33,22 +33,22 @@ namespace lesson4
         {
             int m = x.GetLength(0);
             int n = y.GetLength(0);
-            int[,] len = new int[m + 1,n + 1];
+            int[,] len = new int[m + 1, n + 1];
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
                     if (x[i] == y[j])
                     {
-                        len[i + 1,j + 1] = len[i,j] + 1;
+                        len[i + 1, j + 1] = len[i, j] + 1;
                     }
                     else
                     {
-                        len[i + 1,j + 1] = Math.Max(len[i + 1,j], len[i,j + 1]);
+                        len[i + 1, j + 1] = Math.Max(len[i + 1, j], len[i, j + 1]);
                     }
                 }
             }
-            int cnt = len[m,n];
+            int cnt = len[m, n];
             int[] res = new int[cnt];
             for (int i = m - 1, j = n - 1; i >= 0 && j >= 0;)
             {
@@ -58,7 +58,7 @@ namespace lesson4
                     --i;
                     --j;
                 }
-                else if (len[i + 1,j] > len[i,j + 1])
+                else if (len[i + 1, j] > len[i, j + 1])
                 {
                     --j;
                 }
@@ -84,6 +84,14 @@ namespace lesson4
             int M = 8;
             int[,] W = new int[N, M];
             int[,] Map = new int[N, M];
+            int[,] B =
+            {
+             {1,1,1},
+             {0,1,0},
+             {0,1,0}
+            };
+
+            int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
 
             for (int i = 0; i < N; i++)
             {
@@ -93,17 +101,29 @@ namespace lesson4
                 }
             }
 
-            Map[1, 0] = 0;
-            Map[2, 0] = 0;
-            Map[1, 2] = 0;
-            Map[2, 2] = 0;
+            for (int i = 0; i < B.GetLength(0); i++)
+            {
+                for (int j = 0; j < B.GetLength(1); j++)
+                {
+                    Map[i, j] = B[i, j];
+                }
+            }
+
+            for (int i = B.GetLength(0); i < N; i++)
+            {
+                Map[i, 0] = Map[i-1, 0];
+                for (int j = B.GetLength(1); j < M; j++)
+                {
+                    Map[0, j] = Map[0, j-1];
+                }
+            }
 
             for (int j = 0; j < M; j++)
             {
                 if (Map[0, j] == 0)
                     W[0, j] = 0;
                 else
-                    W[0, j] = 1; // Первая строка заполнена единицами
+                    W[0, j] = 1; 
             }
             for (int i = 1; i < N; i++)
             {
@@ -113,6 +133,7 @@ namespace lesson4
                     W[i, 0] = 1;
                 for (int j = 1; j < M; j++)
                 {
+
                     if (Map[i, j] == 0)
                         W[i, j] = 0;
                     else
