@@ -91,8 +91,6 @@ namespace lesson4
              {0,1,0}
             };
 
-            int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
-
             for (int i = 0; i < N; i++)
             {
                 for (int j = 0; j < M; j++)
@@ -142,7 +140,7 @@ namespace lesson4
             }
 
             Console.WriteLine("Количество маршрутов с препятствиями.Реализовать чтение массива с препятствием и нахождение количество маршрутов.");
-            Console.WriteLine("Массив с  препедствиями.");
+            Console.WriteLine("Массив с  препятствиями.");
             Console.WriteLine(Print2(Map));
             Console.WriteLine("Количество маршрутов");
             Console.WriteLine(Print2(W));
